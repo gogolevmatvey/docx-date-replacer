@@ -1,2 +1,5 @@
+# Основные зависимости
 python-docx==1.2.0
 
+# GUI
+customtkinter==5.2.2

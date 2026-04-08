@@ -1,34 +1,25 @@
 """
 Конфигурация проекта Docx Date Replacer.
+Содержит только неизменяемые константы.
+Пути задаются через GUI.
 """
 
-import os
+from dataclasses import dataclass
 
-# Базовая директория проекта
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Исходная папка с документами
-SOURCE_FOLDER = os.path.join(BASE_DIR, "090303")
+@dataclass(frozen=True)
+class Config:
+    """Неизменяемая конфигурация проекта."""
 
-# Папка для вывода обработанных документов
-OUTPUT_FOLDER = os.path.join(BASE_DIR, "090303_new")
+    # Даты по умолчанию
+    old_date: str = "«29» января 2026 г."
+    new_date: str = "«26» февраля 2026 г."
 
-# Новая дата для замены
-NEW_DATE = "«26» февраля 2026 г."
+    # Настройки обработки
+    exclude_prefix: str = "~$"
+    file_extension: str = ".docx"
+    first_page_paragraphs: int = 50
 
-# Префикс для исключения временных файлов
-EXCLUDE_PREFIX = "~$"
 
-# Расширение файлов для обработки
-FILE_EXTENSION = ".docx"
-
-# Регулярное выражение для поиска даты (точное совпадение)
-# Содержит группы для извлечения месяца (группа 1) и года (группа 2)
-# День «29» захардкожен в паттерне
-DATE_PATTERN = r'«29»\s+(января)\s+(2026)\s*г\.?'
-
-# Блок для поиска (УТВЕРЖДАЮ)
-APPROVAL_BLOCK = "УТВЕРЖДАЮ"
-
-# Количество параграфов для проверки на первой странице
-FIRST_PAGE_PARAGRAPHS = 50
+# Экземпляр по умолчанию
+DEFAULT_CONFIG = Config()

@@ -3,11 +3,6 @@
 """
 
 import unittest
-import sys
-import os
-
-# Добавляем корневую папку в путь
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.date_replacer import DateReplacer
 
@@ -17,7 +12,7 @@ class TestDateReplacer(unittest.TestCase):
 
     def setUp(self):
         """Настройка перед каждым тестом."""
-        self.replacer = DateReplacer("«26» февраля 2026 г.")
+        self.replacer = DateReplacer("«29» января 2026 г.", "«26» февраля 2026 г.")
 
     def test_find_date_standard_format(self):
         """Поиск даты в стандартном формате."""
@@ -61,17 +56,12 @@ class TestDateReplacer(unittest.TestCase):
         result = self.replacer.find_date(text)
         self.assertIsNone(result)
 
-    def test_find_date_details(self):
-        """Поиск даты с возвратом деталей."""
-        text = "«29» января 2026 г."
-        result = self.replacer.find_date_details(text)
-        self.assertEqual(result, ("29", "января", "2026"))
-
-    def test_find_date_details_not_found(self):
-        """Поиск даты с возвратом деталей, когда даты нет."""
-        text = "«27» февраля 2026 г."
-        result = self.replacer.find_date_details(text)
-        self.assertIsNone(result)
+    def test_search_pattern_returns_compiled_regex(self):
+        """Проверка что search_pattern возвращает скомпилированный regex."""
+        import re
+        pattern = self.replacer.search_pattern()
+        self.assertIsInstance(pattern, re.Pattern)
+        self.assertTrue(pattern.search("«29» января 2026 г."))
 
     def test_replace_date_standard(self):
         """Замена даты в стандартном формате."""
@@ -93,44 +83,6 @@ class TestDateReplacer(unittest.TestCase):
         new_text, changed = self.replacer.replace_date(text)
         self.assertTrue(changed)
         self.assertEqual(new_text, "«26» февраля 2026 г. и ещё «26» февраля 2026 г.")
-
-    def test_validate_date_format_valid(self):
-        """Валидация корректной даты."""
-        text = "«29» января 2026 г."
-        result = self.replacer.validate_date_format(text)
-        self.assertTrue(result)
-
-    def test_validate_date_format_invalid_day(self):
-        """Валидация даты с неправильным днём."""
-        text = "«32» января 2026 г."
-        result = self.replacer.validate_date_format(text)
-        # Паттерн найдёт дату, но день 32 невалиден
-        # Однако наш паттерн ищет только «29», так что это не найдётся
-        self.assertFalse(result)
-
-    def test_validate_date_format_invalid_month(self):
-        """Валидация даты с неправильным месяцем."""
-        text = "«29» мартобря 2026 г."
-        result = self.replacer.validate_date_format(text)
-        self.assertFalse(result)
-
-    def test_has_approval_block(self):
-        """Проверка наличия блока «УТВЕРЖДАЮ»."""
-        text = "УТВЕРЖДАЮ: Директор"
-        result = self.replacer.has_approval_block(text)
-        self.assertTrue(result)
-
-    def test_has_approval_block_lowercase(self):
-        """Проверка наличия блока «УТВЕРЖДАЮ» в нижнем регистре."""
-        text = "утверждаю: директор"
-        result = self.replacer.has_approval_block(text)
-        self.assertTrue(result)
-
-    def test_has_approval_block_not_found(self):
-        """Проверка отсутствия блока «УТВЕРЖДАЮ»."""
-        text = "СОГЛАСОВАНО: Директор"
-        result = self.replacer.has_approval_block(text)
-        self.assertFalse(result)
 
 
 if __name__ == "__main__":
