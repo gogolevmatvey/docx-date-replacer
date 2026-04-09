@@ -90,4 +90,4 @@ pytest tests/ --cov=src --cov-report=term-missing -v
 
 ## Лицензия
 
-[MIT](LICENSE)
+MIT
