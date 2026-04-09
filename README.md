@@ -2,18 +2,14 @@
 
 Утилита для пакетной замены даты в документах `.docx`.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/python--docx-1.2.0-2F5496?logo=python&logoColor=white" alt="python-docx">
-  <img src="https://img.shields.io/badge/CustomTkinter-5.2.2-2B2B2B?logo=python&logoColor=white" alt="CustomTkinter">
-  <img src="https://img.shields.io/badge/PyInstaller-6.x-FFB13B?logo=python&logoColor=white" alt="PyInstaller">
-  <img src="https://img.shields.io/badge/Version-1.0.0-green" alt="Version">
-  <img src="https://img.shields.io/badge/License-MIT-lightgrey" alt="License">
-</p>
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![python-docx](https://img.shields.io/badge/python--docx-1.2.0-2F5496?logo=python&logoColor=white)
+![CustomTkinter](https://img.shields.io/badge/CustomTkinter-5.2.2-2B2B2B?logo=python&logoColor=white)
+![PyInstaller](https://img.shields.io/badge/PyInstaller-6.x-FFB13B?logo=python&logoColor=white)
+![Version](https://img.shields.io/badge/Version-1.0.0-green)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-<p align="center">
-  <img src="assets/ui.png" alt="Главное окно приложения" width="600">
-</p>
+![Интерфейс приложения](assets/ui.png)
 
 ## Что делает
 
@@ -40,7 +36,7 @@
 
 ```bash
 # Клонирование репозитория
-git clone https://github.com/<ваш-username>/docx-date-replacer.git
+git clone https://github.com/gogolevmatvey/docx-date-replacer.git
 cd docx-date-replacer
 
 # Создание и активация виртуального окружения
