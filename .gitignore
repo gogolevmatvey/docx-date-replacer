@@ -28,6 +28,15 @@ desktop.ini
 ~$*.xlsx
 ~$*.pptx
 
+# PyInstaller
+*.spec
+
+# Тестирование
+.coverage
+
 # Реальные документы (не коммитить)
 090303/
 090303_new/
+
+# Дизайн
+design/

@@ -27,6 +27,19 @@ class App(ctk.CTk):
         self.geometry("700x650")
         self.minsize(600, 500)
 
+        # Иконка окна
+        import sys
+        if getattr(sys, 'frozen', False):
+            # Запуск из .exe — иконка во временной папке _MEIPASS
+            base_dir = sys._MEIPASS  # type: ignore[attr-defined]
+        else:
+            # Запуск из исходников — корень проекта
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        icon_path = os.path.join(base_dir, "docx-date-replacer.ico")
+        if os.path.exists(icon_path):
+            self.iconbitmap(icon_path)
+
         ctk.set_appearance_mode("System")
         ctk.set_default_color_theme("blue")
 
